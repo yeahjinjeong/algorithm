@@ -1,9 +1,10 @@
 package org.example;
 
-import java.util.HashSet;
 import java.util.Scanner;
-import java.util.Set;
 
+/**
+ * 6. 중복 문자 제거
+ */
 public class EliminateDuplicatedCharacter {
     public static void main(String[] args) {
         EliminateDuplicatedCharacter eliminateDuplicatedCharacter = new EliminateDuplicatedCharacter();
