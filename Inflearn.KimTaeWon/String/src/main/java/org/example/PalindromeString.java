@@ -44,5 +44,4 @@ public class PalindromeString {
         if (str.equals(reversedStr)) return "YES";
         return "NO";
     }
-
 }
