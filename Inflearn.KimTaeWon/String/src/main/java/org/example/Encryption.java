@@ -43,5 +43,6 @@ public class Encryption {
             sb.append((char) ascii);
             str = str.substring(length / size);
         }
+        System.out.println(sb.toString());
     }
 }
