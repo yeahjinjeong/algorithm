@@ -21,25 +21,30 @@ public class ReverseWords {
             stringList.add(sc.next());
         }
         reverseWords.solution(stringList);
+        reverseWords.solution2(stringList);
     }
 
     public void solution(List<String> strings) {
         for (String str : strings) {
             StringBuilder stringBuilder = new StringBuilder(str);
             System.out.println(stringBuilder.reverse());
+        }
+    }
 
-//            char[] chars = str.toCharArray();
-//            int lt = 0;
-//            int rt = str.length() - 1;
-//            while (lt < rt) {
-//                char tmp = chars[lt];
-//                chars[lt] = chars[rt];
-//                chars[rt] = tmp;
-//                lt ++;
-//                rt --;
-//            }
-//            String result = String.valueOf(chars);
-//            System.out.println(result);
+    public void solution2(List<String> strings) {
+        for (String str : strings) {
+            char[] chars = str.toCharArray();
+            int lt = 0;
+            int rt = str.length() - 1;
+            while (lt < rt) {
+                char tmp = chars[lt];
+                chars[lt] = chars[rt];
+                chars[rt] = tmp;
+                lt ++;
+                rt --;
+            }
+            String result = String.valueOf(chars);
+            System.out.println(result);
         }
     }
 }
