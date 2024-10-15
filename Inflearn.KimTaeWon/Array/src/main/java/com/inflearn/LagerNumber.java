@@ -1,6 +1,5 @@
-package com.inflarn;
+package com.inflearn;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class LagerNumber {
