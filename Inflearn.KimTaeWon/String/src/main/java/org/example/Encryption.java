@@ -26,6 +26,7 @@ public class Encryption {
             squared = 1;
             int dec = Integer.parseInt(decimal);
             for (int j = dec; j > 0; j /= 10) {
+//            String.valueOf(decimal.charAt(0));
                 ascii = ascii + j % 10 * squared;
                 squared *= 2;
             }
