@@ -21,7 +21,7 @@ public class SearchRanking {
             int rank = 1;
             for (int j = 0; j < n; j++) {
                 if (arr[j] > arr[i]) rank++;
-            }
+            } // j가 몇 번째로 큰지 rank에 기록
             System.out.print(rank + " ");
         }
     }
