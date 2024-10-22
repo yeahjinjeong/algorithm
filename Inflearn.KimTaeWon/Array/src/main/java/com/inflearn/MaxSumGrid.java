@@ -23,46 +23,28 @@ public class MaxSumGrid {
     public void solution(int n, int[][] grid) {
         int max = 0;
         int rowSum = 0;
-
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                rowSum += grid[i][j];
-            }
-            if (rowSum > max) {
-                max = rowSum;
-            }
-            rowSum = 0;
-        }
-
         int columnSum = 0;
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
+                rowSum += grid[i][j];
                 columnSum += grid[j][i];
             }
-            if (columnSum > max) {
-                max = columnSum;
-            }
+            max = Math.max(max, rowSum);
+            max = Math.max(max, columnSum);
+            rowSum = 0;
             columnSum = 0;
         }
 
         int crossSum = 0;
+        int crossSum2 = 0;
 
         for (int i = 0; i < n; i++) {
             crossSum += grid[n-i-1][i];
+            crossSum2 += grid[i][i];
         }
-        if (crossSum > max) {
-            max = crossSum;
-        }
-
-        crossSum = 0;
-
-        for (int i = 0; i < n ; i++) {
-            crossSum += grid[i][i];
-        }
-        if (crossSum > max) {
-            max = crossSum;
-        }
+        max = Math.max(max, crossSum);
+        max = Math.max(max, crossSum2);
 
         System.out.println(max);
     }
