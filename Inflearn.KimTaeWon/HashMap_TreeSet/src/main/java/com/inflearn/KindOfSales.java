@@ -1,9 +1,7 @@
 package com.inflearn;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Scanner;
-import java.util.Set;
 
 public class KindOfSales {
     public static void main(String[] args) {
