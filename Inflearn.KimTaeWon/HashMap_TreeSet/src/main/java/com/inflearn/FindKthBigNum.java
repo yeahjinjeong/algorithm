@@ -20,7 +20,7 @@ public class FindKthBigNum {
         }
 
         findKthBigNum.solution(n, k, arr);
-        findKthBigNum.solution2(n, k, arr);
+        System.out.println(findKthBigNum.solution2(n, k, arr));
     }
 
     private void solution(int n, int k, int[] arr) {
@@ -40,7 +40,7 @@ public class FindKthBigNum {
         }
     }
 
-    private void solution2(int n, int k, int[] arr) {
+    private int solution2(int n, int k, int[] arr) {
         TreeSet<Integer> set = new TreeSet<>(Comparator.reverseOrder());
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
@@ -50,13 +50,10 @@ public class FindKthBigNum {
             }
         }
         int cnt = 0;
-        if (set.size() < k) {
-            System.out.println(-1);
-        } else {
-            for (int x : set) {
+        for (int x : set) {
                 cnt++;
-                if (cnt == k) System.out.println(x);
-            }
+                if (cnt == k) return x;
         }
+        return -1;
     }
 }
