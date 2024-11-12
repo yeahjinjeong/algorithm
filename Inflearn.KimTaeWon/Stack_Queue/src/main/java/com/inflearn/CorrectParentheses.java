@@ -3,7 +3,6 @@ package com.inflearn;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Scanner;
-import java.util.Stack;
 
 /**
  * Stack = LIFO
