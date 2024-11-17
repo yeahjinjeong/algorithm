@@ -17,7 +17,52 @@ public class MusicVideo {
             arr[i] = sc.nextInt();
         }
 
-        musicVideo.solution(n, m, arr);
+        musicVideo.solution2(n, m, arr);
+    }
+
+    private void solution2(int n, int m, int[] arr) {
+        // 1. 범위 세팅
+
+        int lt = arr[n - 1];
+        int rt = 0;
+        for (int i = 0; i < n; i++) {
+            rt += arr[i];
+        }
+
+        // 2. 범위 내에서 이분검색
+
+        // false면 커져야 하고, true면 작아져야 하고
+        // 언제까지 작아져야 하는가?
+        int answer = 0;
+
+        while (lt <= rt) {
+            int mid = (lt + rt) / 2;
+            if (available(n, m, arr, mid)) {
+                answer = mid;
+                rt = mid - 1;
+            } else lt = mid + 1;
+        }
+
+        System.out.println(answer);
+    }
+
+    private boolean available(int n, int m, int[] arr, int mid) {
+        boolean answer = true;
+        int dvd = 0; // 용량
+        int cnt = 0;
+
+        for (int i = 0; i < n; i++) {
+            dvd += arr[i];
+            if (dvd > mid) {
+                cnt++;
+                dvd = arr[i];
+            }
+            if (cnt > m) { // dvd 개수가 초과됐을 때
+                answer = false;
+            }
+            // dvd 개수가 초과되지 않고 정상 종료한다면 true!
+        }
+        return answer;
     }
 
     private void solution(int n, int m, int[] arr) {
@@ -54,4 +99,11 @@ public class MusicVideo {
 
         System.out.println(answer);
     }
+
+    /**
+     * 오답 이유 : 꼭 3장에 나눠 담아야 하는 것이 아니다!
+     *  1장에 담을 수도 있고, 2장에 담을 수도 있다.
+     *  => 2장에 담는다는 것은 3장에 담을 수도 있다는 뜻이기 때문
+     */
+
 }
