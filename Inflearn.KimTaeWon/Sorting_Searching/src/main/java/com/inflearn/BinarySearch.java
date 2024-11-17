@@ -1,8 +1,11 @@
 package com.inflearn;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Scanner;
+
+/**
+ * 이분검색으로 인덱스 찾기
+ */
 
 public class BinarySearch {
     public static void main(String[] args) {
