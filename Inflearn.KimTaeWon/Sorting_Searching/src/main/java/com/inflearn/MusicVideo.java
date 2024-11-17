@@ -1,5 +1,6 @@
 package com.inflearn;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class MusicVideo {
@@ -43,6 +44,17 @@ public class MusicVideo {
             } else lt = mid + 1;
         }
 
+        lt = Arrays.stream(arr).max().getAsInt(); // return <OptionalInt>
+        rt = Arrays.stream(arr).sum(); // return <int>
+
+        while (lt <= rt) {
+            int mid = (lt + rt) / 2;
+            if (available2(arr, mid) <= m) { // 사용되는 dvd개수가 m개보다 작거나 같으면 답이 될 수 있음
+                answer = mid;
+                rt = mid - 1;
+            } else lt = mid + 1;
+        }
+
         System.out.println(answer);
     }
 
@@ -56,12 +68,25 @@ public class MusicVideo {
                 cnt++;
                 dvd = arr[i];
                 if (cnt >= m) { // dvd 개수가 초과됐을 때 (X) 개수가 같아졌다는 것은 지금까지 3개를 채웠다는 의미이다.
+                    // 더 남았다는 것은 무조건 리턴
                     return false;
                 } // 해당 if문은 상위 if문 블록 바깥에 위치해도 괜찮으나, 연산 횟수를 줄이기 위해 내부에 위치시켰다.
             }
             // 정상 종료한다면 true!
         }
         return true;
+    }
+
+    private int available2(int[] arr, int mid) {
+        int dvd = 0, cnt = 0;
+
+        for (int i : arr) {
+            if (dvd+i > mid) {
+                cnt++;
+                dvd = i;
+            } else dvd += i;
+        }
+        return cnt;
     }
 
     private void solution(int n, int m, int[] arr) {
@@ -100,9 +125,8 @@ public class MusicVideo {
     }
 
     /**
-     * 오답 이유 : 꼭 3장에 나눠 담아야 하는 것이 아니다!
-     *  1장에 담을 수도 있고, 2장에 담을 수도 있다.
-     *  => 2장에 담는다는 것은 3장에 담을 수도 있다는 뜻이기 때문
+     * 오답 이유 : 꼭 3개에 나눠 담아야 하는 것이 아니다!
+     *  => 2개에 담는다는 것은 3개에 담을 수도 있다는 뜻이기 때문
      */
 
 }
