@@ -47,7 +47,6 @@ public class MusicVideo {
     }
 
     private boolean available(int n, int m, int[] arr, int mid) {
-        boolean answer = true;
         int dvd = 0; // 용량
         int cnt = 0;
 
@@ -56,13 +55,13 @@ public class MusicVideo {
             if (dvd > mid) {
                 cnt++;
                 dvd = arr[i];
+                if (cnt >= m) { // dvd 개수가 초과됐을 때 (X) 개수가 같아졌다는 것은 지금까지 3개를 채웠다는 의미이다.
+                    return false;
+                } // 해당 if문은 상위 if문 블록 바깥에 위치해도 괜찮으나, 연산 횟수를 줄이기 위해 내부에 위치시켰다.
             }
-            if (cnt > m) { // dvd 개수가 초과됐을 때
-                answer = false;
-            }
-            // dvd 개수가 초과되지 않고 정상 종료한다면 true!
+            // 정상 종료한다면 true!
         }
-        return answer;
+        return true;
     }
 
     private void solution(int n, int m, int[] arr) {
