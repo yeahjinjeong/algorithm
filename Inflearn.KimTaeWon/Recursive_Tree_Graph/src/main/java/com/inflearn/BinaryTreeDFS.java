@@ -5,10 +5,10 @@ package com.inflearn;
  * 중위순회 : 왼쪽자식 - 부모 - 오른쪽자식
  * 후위순회 : 왼쪽자식 - 오른쪽자식 - 부모
  */
-public class BinaryTree {
+public class BinaryTreeDFS {
     Node root;
     public static void main(String[] args) {
-        BinaryTree binaryTree = new BinaryTree();
+        BinaryTreeDFS binaryTree = new BinaryTreeDFS();
 
         binaryTree.root = new Node(1);
         binaryTree.root.lt = new Node(2);
@@ -61,11 +61,3 @@ public class BinaryTree {
     // -> postfix(3) -> postfix(6) -> null return -> null return -> 6 출력 -> postfix(7) -> null return -> null return -> 7 출력 } -> 3 출력 } -> 1 출력 }
 }
 
-class Node {
-    int data;
-    Node lt, rt;
-    public Node(int val) {
-        data = val;
-        lt = rt = null;
-    }
-}
