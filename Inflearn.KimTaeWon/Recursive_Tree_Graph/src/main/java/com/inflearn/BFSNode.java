@@ -1,10 +1,10 @@
 package com.inflearn;
 
-public class Node {
+public class BFSNode {
     int data;
-    Node lt, rt;
+    BFSNode lt, rt;
 
-    public Node(int val) {
+    public BFSNode(int val) {
         data = val;
         lt = rt = null;
     }
