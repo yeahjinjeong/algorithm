@@ -29,7 +29,7 @@ public class GraphBFS {
             graph[a][b] = 1;
         }
         graphBFS.BFS();
-        for (int a = 1; a < answer.length; a++) {
+        for (int a = 2; a < answer.length; a++) {
             System.out.println(a + " : " + answer[a]);
         }
     }
@@ -39,14 +39,13 @@ public class GraphBFS {
         queue.add(1);
         answer[0] = -1;
         answer[1] = -1;
-        while (Arrays.stream(answer).anyMatch(a -> a == 0)) {
-            int size = queue.size();
-            for (int s = 0; s < size; s++) {
+        while (Arrays.stream(answer).anyMatch(a -> a == 0)) { // answer 배열이 다 채워지는 순간 종료
+            for (int s = 0; s < queue.size(); s++) { // 한 레벨씩 돌면서 필터링 하는 느낌
                 int cv = queue.poll();
                 for (int j = 1; j <= n; j++) {
                     if (graph[cv][j] == 1) {
-                        if (answer[j] == 0) answer[j] = distance+1;
-                        queue.offer(j);
+                        if (answer[j] == 0) answer[j] = distance + 1; // 제일 먼저 나오는대로 초기화하기
+                        queue.offer(j); // 가리킴 당하는 정점이 큐에 추가됨 -> 그러나 가리키는 것이 없다면 삭제됨
                     }
                 }
             }
