@@ -31,7 +31,6 @@ public class PartitionProblemAmazon {
 
     private void DFS(int i) {
         if (i == n) { // arr을 0부터 도는 중 ( 0부터 시작했으므로 n, 만약 1부터 시작했다면 n+1)
-            StringBuilder sb = new StringBuilder();
             int sum1 = 0, sum2 = 0;
             for (int k : arr.keySet()) {
                 if (arr.get(k) == 1) {
