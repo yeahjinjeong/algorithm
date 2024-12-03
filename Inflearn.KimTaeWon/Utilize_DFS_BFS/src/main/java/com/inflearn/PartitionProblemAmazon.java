@@ -29,6 +29,7 @@ public class PartitionProblemAmazon {
             arr.put(key, 0);
             DFS(L + 1);
         }
+        // 이 방법을 썼을 때는 부분집합의 원소를 세세히 알 수 있음!
     }
 
     static boolean flag2 = false;
@@ -46,6 +47,7 @@ public class PartitionProblemAmazon {
             DFS(L + 1, sum+arr2[L]); // 부분집합에 속함
             DFS(L + 1, sum); // 부분집합에 속하지 않음
         }
+        // 이 방법에서는 부분집합의 원소를 알 수 없고, 합만 알 수 있음
     }
 
     public static void main(String[] args) {
