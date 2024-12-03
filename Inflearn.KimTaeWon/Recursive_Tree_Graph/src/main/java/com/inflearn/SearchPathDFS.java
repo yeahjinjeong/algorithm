@@ -2,13 +2,16 @@ package com.inflearn;
 
 import java.util.Scanner;
 
-public class GraphDFS {
+/**
+ * 경로탐색 - 인접행렬 ver.
+ */
+public class SearchPathDFS {
     static int n, m;
     static int[] arr;
     static int[][] graph;
     static int answer = 0;
     public static void main(String[] args) {
-        GraphDFS graphDFS = new GraphDFS();
+        SearchPathDFS searchPathDFS = new SearchPathDFS();
 
         Scanner sc = new Scanner(System.in);
 
@@ -24,7 +27,7 @@ public class GraphDFS {
         }
 
         arr[1] = 1;
-        graphDFS.DFS(1);
+        searchPathDFS.DFS(1);
         System.out.println(answer);
     }
 

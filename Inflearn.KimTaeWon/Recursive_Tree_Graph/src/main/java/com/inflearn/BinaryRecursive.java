@@ -13,6 +13,7 @@ public class BinaryRecursive {
         binaryRecursive.DFS(n);
     }
 
+    // 10진수 -> 2진수
     private void DFS(int n) {
         if (n == 0) return;
         else {

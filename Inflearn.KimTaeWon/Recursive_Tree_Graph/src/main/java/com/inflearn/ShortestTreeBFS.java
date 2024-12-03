@@ -3,17 +3,17 @@ package com.inflearn;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class ShortestBFS {
+public class ShortestTreeBFS {
     BFSNode root;
     public static void main(String[] args) {
-        ShortestBFS shortestBFS = new ShortestBFS();
-        shortestBFS.root = new BFSNode(1);
-        shortestBFS.root.lt = new BFSNode(2);
-        shortestBFS.root.rt = new BFSNode(3);
-        shortestBFS.root.lt.lt = new BFSNode(4);
-        shortestBFS.root.lt.rt = new BFSNode(5);
+        ShortestTreeBFS shortestTreeBFS = new ShortestTreeBFS();
+        shortestTreeBFS.root = new BFSNode(1);
+        shortestTreeBFS.root.lt = new BFSNode(2);
+        shortestTreeBFS.root.rt = new BFSNode(3);
+        shortestTreeBFS.root.lt.lt = new BFSNode(4);
+        shortestTreeBFS.root.lt.rt = new BFSNode(5);
 
-        System.out.println(shortestBFS.BFS(shortestBFS.root));
+        System.out.println(shortestTreeBFS.BFS(shortestTreeBFS.root));
     }
 
     private int BFS(BFSNode root) {
