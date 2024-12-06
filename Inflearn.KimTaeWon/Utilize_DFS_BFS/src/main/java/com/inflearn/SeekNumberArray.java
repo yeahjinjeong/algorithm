@@ -58,7 +58,7 @@ public class SeekNumberArray {
                 if (visit[i] == 0) {
                     visit[i] = 1;
                     answer[L] = arr[i];
-                    DFS(L + 1);
+                    DFS2(L + 1);
 //                    visit[i] = 0;
                 }
             }
