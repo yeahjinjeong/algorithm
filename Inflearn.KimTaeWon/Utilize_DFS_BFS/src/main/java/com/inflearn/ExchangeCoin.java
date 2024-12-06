@@ -23,8 +23,9 @@ public class ExchangeCoin {
 
     private void DFS(int L, int sum) {
         if (sum > m) return;
+        if (L >= answer) return;
         if (sum == m) {
-            answer = Math.min(answer, L);
+            answer = L;
         } else {
             for (int c : coin) {
                 DFS(L + 1, sum + c);
