@@ -59,7 +59,7 @@ public class SeekNumberArray {
                     visit[i] = 1;
                     answer[L] = arr[i];
                     DFS2(L + 1);
-//                    visit[i] = 0;
+                    visit[i] = 0;
                 }
             }
         }
