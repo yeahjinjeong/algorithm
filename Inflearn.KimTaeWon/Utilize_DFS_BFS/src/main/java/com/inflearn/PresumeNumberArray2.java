@@ -37,20 +37,14 @@ public class PresumeNumberArray2 {
         visit = new int[N + 1];
         pascal = new int[N][N];
 
-        presumeNumberArray.DFS(0);
+        presumeNumberArray.DFS(0, 0);
     }
 
-    private void DFS(int L) {
+    private void DFS(int L, int sum) {
         if (flag) return;
         if (L == N) {
-            int sum = 0;
-            for (int i = 0; i < N; i++) {
-                sum += top[i] * DFS2(N - 1, i);
-            }
             if (sum == f) {
-                for (int t : top) {
-                    System.out.print(t + " ");
-                }
+                for (int t : top) System.out.print(t + " ");
                 flag = true;
             }
         } else {
@@ -58,7 +52,7 @@ public class PresumeNumberArray2 {
                 if (visit[i] == 0) {
                     visit[i] = 1;
                     top[L] = i;
-                    DFS(L + 1);
+                    DFS(L + 1, sum + top[L] * DFS2(N - 1, L));
                     visit[i] = 0;
                 }
             }
