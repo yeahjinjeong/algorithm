@@ -23,40 +23,41 @@ public class PresumeNumberArray {
             arr[i] = i + 1;
         }
 
-        presumeNumberArray.DFS(0, arr);
+        presumeNumberArray.arrayDFS(0, arr);
     }
 
-    private void DFS2(int L, int[] arr) {
+    private void makePascal(int L, int[] arr) {
         if (flag) return;
         if (L == 1) {
             if (arr[0] == f) {
-                flag = true;
+                flag = true; // 결과가 주어진 수(f)와 일치함을 뜻함
             }
         } else {
             int[] newArr = new int[L - 1];
             for (int i = 0; i < L - 1; i++) {
                 newArr[i] = arr[i] + arr[i + 1];
             }
-            DFS2(L - 1, newArr);
+            makePascal(L - 1, newArr);
         }
     }
 
-    private void DFS(int L, int[] arr) {
+    private void arrayDFS(int L, int[] arr) {
         if (flag2) return;
         if (L == n) {
-            DFS2(L, top);
+            makePascal(L, top);
             if (flag) {
                 for (int t : top) {
                     System.out.print(t + " ");
                 }
-                flag2 = true;
+                flag = false;
+                flag2 = true; // 첫번째 답만 출력하고자 함
             }
         } else {
             for (int i = 0; i < n; i++) {
                 if (visit[i] == 0) {
                     visit[i] = 1;
                     top[L] = arr[i];
-                    DFS(L + 1, arr);
+                    arrayDFS(L + 1, arr);
                     visit[i] = 0;
                 }
             }
