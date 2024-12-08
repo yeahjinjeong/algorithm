@@ -21,7 +21,8 @@ public class NCM {
 
         answer = new int[m];
 
-        ncm.DFS(0);
+//        ncm.DFS(0);
+        ncm.DFS2(0, 1);
 
     }
 
@@ -40,6 +41,20 @@ public class NCM {
                     DFS(L + 1);
                     visit[i] = 0;
                 }
+            }
+        }
+    }
+
+    private void DFS2(int L, int f) {
+        if (L == m) {
+            for (int a : answer) {
+                System.out.print(a + " ");
+            }
+            System.out.println();
+        } else {
+            for (int i = f; i <= n; i++) {
+                answer[L] = i;
+                DFS2(L + 1, i + 1);
             }
         }
     }
