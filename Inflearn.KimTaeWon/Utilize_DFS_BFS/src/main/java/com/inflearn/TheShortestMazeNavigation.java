@@ -31,12 +31,13 @@ public class TheShortestMazeNavigation {
 
         while (!queue.isEmpty()) {
             int qSize = queue.size();
-            for (int q = 0; q < qSize; q++) {
+            for (int q = 0; q < qSize; q++) { // 병렬적으로 계산함
                 Site cur = queue.poll();
                 for (int i = 0; i < 4; i++) {
                     Site next = new Site(cur.x + dx[i], cur.y + dy[i]);
                     if (next.x == end.x && next.y == end.y) return distance + 1;
                     if (next.x >= 1 && next.x <= 7 && next.y >= 1 && next.y <= 7 && board[next.x][next.y] == 0) {
+                        board[next.x][next.y] =  1;
                         queue.offer(next);
                     }
                 }
