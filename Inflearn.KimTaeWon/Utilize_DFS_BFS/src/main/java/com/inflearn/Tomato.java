@@ -35,15 +35,15 @@ public class Tomato {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (box[i][j] == 1) {
-                    queue.offer(new Point(j, i));
+                    queue.offer(new Point(j, i)); // 주의! j가 x이고 i가 y
                     flag = true;
                 }
             }
-        }
+        } // 일단 익어있는 토마토들을 queue에 보관
 
-        if (!flag) return 0;
+        if (!flag) return 0; // 만약 익어있는 게 없다면 (1이 하나도 없다면) 익을 수 있는 것도 없다!
 
-        int distance = 0;
+        int day = 0;
 
         while (!queue.isEmpty()) {
             flag = true;
@@ -61,20 +61,20 @@ public class Tomato {
                     }
                 }
             }
-            distance++;
+            day++; // for문이 끝나면 하루가 지난 것!
 
-            for (int i = 0; i < n; i++) {
+            for (int i = 0; i < n; i++) { // 다 익었나 확인!
                 for (int j = 0; j < m; j++) {
                     if (box[i][j] == 0) {
-                        flag = false;
+                        flag = false; // 안 익은 게 있다!
                         break;
                     }
                 }
             }
-            if (flag) {
-                return distance;
+            if (flag) { // 다 익었다!
+                return day; // 얼마만에 다 익었나!
             }
-        }
-        return -1;
+        } // while문이 종료되도록 return이 안 된거면,,
+        return -1; // 절대 못 익는 위치에 토마토가 있었던 것!
     }
 }
