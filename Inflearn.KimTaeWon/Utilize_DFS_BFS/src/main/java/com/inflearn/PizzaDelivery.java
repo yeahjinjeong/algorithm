@@ -8,7 +8,7 @@ public class PizzaDelivery {
     static int N, M;
     static List<Point> house = new ArrayList<>();
     static List<Point> pizza = new ArrayList<>();
-    static int[] visit;
+    static int[] combi;
     static int answer = Integer.MAX_VALUE;
     public static void main(String[] args) {
         PizzaDelivery pizzaDelivery = new PizzaDelivery();
@@ -22,36 +22,31 @@ public class PizzaDelivery {
             for (int j = 0; j < N; j++) {
                 int k = sc.nextInt();
                 if (k == 1) house.add(new Point(j, i));
-                if (k == 2) pizza.add(new Point(j, i));
+                else if (k == 2) pizza.add(new Point(j, i));
             }
         }
 
-        visit = new int[pizza.size()];
-        Point[] arr = new Point[M];
+        combi = new int[M];
 
-        pizzaDelivery.DFS(0, arr);
+        pizzaDelivery.DFS(0, 0);
         System.out.println(answer);
     }
 
-    private void DFS(int L, Point[] arr) {
+    private void DFS(int L, int P) {
         if (L == M) {
             int sum = 0;
-            for (Point p : house) {
+            for (Point h : house) {
                 int dis = Integer.MAX_VALUE;
-                for (Point a : arr) {
-                    dis = Math.min(dis, Math.abs(a.x - p.x) + Math.abs(a.y - p.y));
+                for (int c : combi) {
+                    dis = Math.min(dis, Math.abs(pizza.get(c).x - h.x) + Math.abs(pizza.get(c).y - h.y));
                 }
                 sum += dis;
             }
             answer = Math.min(answer, sum);
         } else {
-            for (int i = 0; i < pizza.size(); i++) {
-                if (visit[i] == 0) {
-                    visit[i] = 1;
-                    arr[L] = pizza.get(i);
-                    DFS(L + 1, arr);
-                    visit[i] = 0;
-                }
+            for (int i = P; i < pizza.size(); i++) {
+                    combi[L] = i;
+                    DFS(L + 1, i + 1); // P + 1 해도 답이 나오지만, i + 1을 했을 때 시간을 줄일 수 있다!
             }
         }
     }
