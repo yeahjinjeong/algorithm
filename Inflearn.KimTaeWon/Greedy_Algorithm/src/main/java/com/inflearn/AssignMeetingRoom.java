@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AssignMeetingRoom {
-    static List<Reservation> reservations;
     static int answer, time = Integer.MIN_VALUE;
     public static void main(String[] args) {
         AssignMeetingRoom assignMeetingRoom = new AssignMeetingRoom();
@@ -15,7 +14,7 @@ public class AssignMeetingRoom {
 
         int n = sc.nextInt();
 
-        reservations = new ArrayList<>();
+        List<Reservation> reservations = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
             int a = sc.nextInt();
@@ -26,12 +25,19 @@ public class AssignMeetingRoom {
 
         Collections.sort(reservations);
 
-        assignMeetingRoom.solution();
-
-        System.out.println(answer);
+        System.out.println(assignMeetingRoom.solution(reservations, n));
     }
 
-    private void solution() {
+    private int solution(List<Reservation> reservations, int n) {
+        int cnt = 0;
+        int end = 0;
+        for (Reservation r: reservations) {
+            if (r.start >= end) {
+                cnt++;
+                end = r.end;
+            }
+        }
+        return cnt;
     }
 
 }
@@ -47,7 +53,7 @@ class Reservation implements Comparable<Reservation> {
 
     @Override
     public int compareTo(Reservation o) {
-        if this.
-        return this.start - o.start;
+        if (this.end == o.end) return this.start - o.start;
+        else return this.end - o.end;
     }
 }
