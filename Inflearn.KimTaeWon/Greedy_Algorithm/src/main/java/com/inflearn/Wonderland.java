@@ -1,9 +1,6 @@
 package com.inflearn;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * 그래프와 트리의 차이점
@@ -15,29 +12,48 @@ import java.util.Scanner;
  *
  */
 public class Wonderland {
+    static int n, m;
+    // solution
     static int[] unionAndFind;
-    static int sum;
+    static int sum = 0;
+    // solution2
+    static int[] check;
+    static int sum2 = 0;
+
     public static void main(String[] args) {
         Wonderland wonderland = new Wonderland();
 
         Scanner sc = new Scanner(System.in);
 
-        int n = sc.nextInt();
+        // 1
+        n = sc.nextInt();
         unionAndFind = new int[n + 1];
+        // 2
+        ArrayList<ArrayList<Prim>> graph = new ArrayList<>();
+
         for (int i = 0; i <= n; i++) {
             unionAndFind[i] = i;
+            graph.add(new ArrayList<>());
         }
-        int m = sc.nextInt();
+
+        m = sc.nextInt();
+
         List<Kruskal> kruskals = new ArrayList<>();
+
         for (int i = 0; i < m; i++) {
             int v1 = sc.nextInt();
             int v2 = sc.nextInt();
             int cost = sc.nextInt();
             kruskals.add(new Kruskal(v1, v2, cost));
+            graph.get(v1).add(new Prim(v2, cost));
+            graph.get(v2).add(new Prim(v1, cost));
         }
 
         wonderland.solution(kruskals);
         System.out.println(sum);
+
+        wonderland.solution2(graph);
+        System.out.println(sum2);
     }
 
     private void solution(List<Kruskal> kruskals) {
@@ -60,6 +76,29 @@ public class Wonderland {
         unionAndFind[fa] = fb;
         sum += kruskal.cost;
     }
+
+    /**
+     * 무방향 인접 리스트
+     * @param graph
+     *
+     * 프림 알고리즘 *
+     */
+
+    private void solution2(ArrayList<ArrayList<Prim>> graph) {
+        PriorityQueue<Prim> pQ = new PriorityQueue<>(Comparator.naturalOrder());
+        check = new int[n + 1];
+        pQ.offer(new Prim(1, 0));
+        while (!pQ.isEmpty()) {
+            Prim tmp = pQ.poll();
+            if (check[tmp.v] == 0) {
+                check[tmp.v] = 1;
+                sum2 += tmp.cost;
+                for (Prim p : graph.get(tmp.v)) {
+                    if (check[p.v] == 0) pQ.offer(p);
+                }
+            }
+        }
+    }
 }
 
 class Kruskal implements Comparable<Kruskal> {
@@ -75,6 +114,21 @@ class Kruskal implements Comparable<Kruskal> {
 
     @Override
     public int compareTo(Kruskal o) {
+        return this.cost - o.cost;
+    }
+}
+
+class Prim implements Comparable<Prim> {
+    int v;
+    int cost;
+
+    public Prim(int v, int cost) {
+        this.v = v;
+        this.cost = cost;
+    }
+
+    @Override
+    public int compareTo(Prim o) {
         return this.cost - o.cost;
     }
 }
