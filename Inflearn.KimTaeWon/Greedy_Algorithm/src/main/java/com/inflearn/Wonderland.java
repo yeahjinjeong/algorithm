@@ -130,5 +130,5 @@ class Prim implements Comparable<Prim> {
     @Override
     public int compareTo(Prim o) {
         return this.cost - o.cost;
-    }
+    } // 이건 sort를 안해줘도 add될 때 자동정렬이 되는 것일까? => 아니다. 다만 PriorityQueue안에서는 cost 순위로 정렬이 될 것.
 }
