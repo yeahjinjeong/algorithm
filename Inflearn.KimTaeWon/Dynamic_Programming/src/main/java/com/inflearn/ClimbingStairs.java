@@ -25,7 +25,7 @@ public class ClimbingStairs {
      * 따라서 n-2번째 경우의 수 + n-1번째 경우의 수 = n번째 경우의 수
      * => 피보나치 수열
      */
-    
+
     private int solution() {
         int[] dy = new int[N + 1];
 
