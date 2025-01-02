@@ -1,6 +1,5 @@
 package com.inflearn;
 
-import javax.swing.plaf.basic.BasicRootPaneUI;
 import java.util.Scanner;
 
 public class CrossingStoneBridge {
