@@ -24,6 +24,7 @@ public class PartOfMaxIncreasing {
 
     private void solution(int[] arr) {
         dy = new int[arr.length];
+        dy[0] = 1;
         for (int i = 1; i < arr.length; i++) {
             int max = 0;
             for (int j = i - 1; j >= 0; j--) { // 바로 앞부터 처음까지
