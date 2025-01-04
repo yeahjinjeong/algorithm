@@ -20,7 +20,7 @@ public class ExchangingCoin {
         int m = sc.nextInt();
         dy = new int[m + 1];
 
-        exchangingCoin.solution(coin, m);
+        System.out.println(exchangingCoin.solution(coin, m));
     }
 
     private int solution(int[] coin, int m) {
