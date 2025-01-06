@@ -1,11 +1,9 @@
 package com.baekjoon;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
 
 public class _2583 {
-    static int row, col, sum = 0;
+    static int row, col, area = 0;
     static int[] dx = {0, 1, 0, -1};
     static int[] dy = {1, 0, -1, 0};
     static int[][] board;
@@ -16,7 +14,7 @@ public class _2583 {
         row = sc.nextInt();
         col = sc.nextInt();
 
-        board = new int[row + 1][col + 1];
+        board = new int[row][col];
 
         int k = sc.nextInt();
         for (int i = 0; i < k; i++) {
@@ -25,9 +23,9 @@ public class _2583 {
             int x2 = sc.nextInt();
             int y2 = sc.nextInt();
             // 0 2 4 4
-            for (int x = x1; x <= x2; x++) {
-                for (int y = y1; y <= y2; y++) {
-                    board[x][y] = 1;
+            for (int x = x1; x < x2; x++) {
+                for (int y = y1; y < y2; y++) {
+                    board[y][x] = 1;
                 }
             }
             // board[0][2] board[0][3] board[0][4]
@@ -36,30 +34,36 @@ public class _2583 {
             // board[4][2] board[4][3] board[4][4]
         }
 
-        _2583.BFS(new Point(0, 0));
-        System.out.println(sum);
-    }
+        int sum = 0;
+        List<Integer> list = new ArrayList<>();
 
-    private void BFS(Point point) {
-        Queue<Point> queue = new LinkedList<>();
-
-        queue.offer(point);
-
-        while (!queue.isEmpty()) {
-            int qSize = queue.size();
-            for (int q = 0; q < qSize; q++) {
-                Point cur = queue.poll();
-
-                for (int i = 0; i < 4; i++) {
-                    int nx = cur.x + dx[i];
-                    int ny = cur.y + dy[i];
-                    if (nx >= 0 && ny >= 0 && nx < col && ny < row && board[nx][ny] == 0) {
-                        board[nx][ny] = 1;
-                        queue.offer(new Point(nx, ny));
-                    }
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (board[i][j] == 0) {
+                    _2583.DFS(j, i);
+                    sum++;
+                    list.add(area);
+                    area = 0;
                 }
             }
-            sum++;
+        }
+
+        System.out.println(sum);
+        Collections.sort(list);
+        for (int l : list) {
+            System.out.print(l + " ");
+        }
+    }
+
+    private void DFS(int x, int y) {
+        area++;
+        for (int i = 0; i < dx.length; i++) {
+            int nx = x + dx[i];
+            int ny = y + dy[i];
+            if (nx >= 0 && nx < col && ny >= 0 && ny < row && board[ny][nx] == 0) {
+                board[ny][nx] = 1;
+                DFS(nx, ny);
+            }
         }
     }
 }
