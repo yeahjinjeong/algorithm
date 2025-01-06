@@ -1,0 +1,3 @@
+include 'BaekJoon:DFSBFS'
+findProject(':BaekJoon:DFSBFS')?.name = 'DFSBFS'
+
