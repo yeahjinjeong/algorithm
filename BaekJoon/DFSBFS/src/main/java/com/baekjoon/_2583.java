@@ -23,15 +23,15 @@ public class _2583 {
             int x2 = sc.nextInt();
             int y2 = sc.nextInt();
             // 0 2 4 4
-            for (int x = x1; x < x2; x++) {
-                for (int y = y1; y < y2; y++) {
+            for (int y = y1; y < y2; y++) {
+                for (int x = x1; x < x2; x++) {
                     board[y][x] = 1;
                 }
             }
-            // board[0][2] board[0][3] board[0][4]
-            // board[1][2] board[1][3] board[1][4]
+            // board[0][2] board[0][3]
+            // board[1][2] board[1][3]
             // ...
-            // board[4][2] board[4][3] board[4][4]
+            // board[4][2] board[4][3]
         }
 
         int sum = 0;
@@ -40,6 +40,7 @@ public class _2583 {
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 if (board[i][j] == 0) {
+                    board[i][j] = 1;
                     _2583.DFS(j, i);
                     sum++;
                     list.add(area);
@@ -65,15 +66,5 @@ public class _2583 {
                 DFS(nx, ny);
             }
         }
-    }
-}
-
-class Point {
-    int x;
-    int y;
-
-    public Point(int x, int y) {
-        this.x = x;
-        this.y = y;
     }
 }
