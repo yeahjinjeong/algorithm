@@ -7,7 +7,7 @@ public class _2667 {
     static int[] dx = {-1, 0, 1, 0};
     static int[] dy = {0, -1, 0, 1};
     static int area = 0;
-    static int[][] board;
+    static int[][] board, visit;
     public static void main(String[] args) {
         _2667 _2667 = new _2667();
 
@@ -15,6 +15,7 @@ public class _2667 {
 
         n = sc.nextInt();
         board = new int[n][n];
+        visit = new int[n][n];
 
         for (int i = 0; i < n; i++) {
             String s = sc.next();
@@ -23,15 +24,20 @@ public class _2667 {
             }
         }
 
-        int num = 2;
+        _2667.DFSSolution();
+    }
 
+    private void DFSSolution() {
+
+        int num = 1;
         List<Integer> answer = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (board[i][j] == 1) {
-                    board[i][j] = num;
-                    _2667.DFS(i, j, num);
+                    board[i][j] = 0;
+                    visit[i][j] = num;
+                    DFS(i, j, num);
                     num++;
                     answer.add(area);
                     area = 0;
@@ -52,7 +58,8 @@ public class _2667 {
             int ny = y  + dy[i];
             int nx = x  + dx[i];
             if (nx >= 0 && nx < n && ny >= 0 && ny < n && board[ny][nx] == 1) {
-                board[ny][nx] = num;
+                board[ny][nx] = 0;
+                visit[ny][nx] = num;
                 DFS(ny, nx, num);
             }
         }
