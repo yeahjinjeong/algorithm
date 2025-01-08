@@ -1,5 +1,8 @@
 package com.baekjoon;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class _2667 {
@@ -8,17 +11,20 @@ public class _2667 {
     static int[] dy = {0, -1, 0, 1};
     static boolean[][] board;
     static int[][] visit;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         _2667 _2667 = new _2667();
 
-        Scanner sc = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//        Scanner sc = new Scanner(System.in);
 
-        n = sc.nextInt();
+        n = Integer.parseInt(br.readLine());
+//        n = sc.nextInt();
         board = new boolean[n][n];
         visit = new int[n][n];
 
         for (int i = 0; i < n; i++) {
-            String s = sc.next();
+            String s = br.readLine();
+//            String s = sc.next();
             for (int j = 0; j < n; j++) {
                 board[i][j] = s.charAt(j) == '1';
             }
