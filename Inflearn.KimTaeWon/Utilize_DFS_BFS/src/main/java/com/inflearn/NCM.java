@@ -46,14 +46,14 @@ public class NCM {
     }
 
     private void DFS2(int L, int f) {
-        if (L == m) {
+        if (L == m) { // 몇개 뽑혔나
             for (int a : answer) {
                 System.out.print(a + " ");
             }
             System.out.println();
         } else {
             for (int i = f; i <= n; i++) {
-                answer[L] = i;
+                answer[L] = i; // answer[0] = 1 -> DFS2(1, 2) -> answer[1] = 2 -> DFS2(1
                 DFS2(L + 1, i + 1);
             }
         }
