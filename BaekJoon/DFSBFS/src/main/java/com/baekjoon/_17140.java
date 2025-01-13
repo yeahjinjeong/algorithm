@@ -6,9 +6,9 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class _17140 {
-    static int r, c, k, maxR, maxC;
-    static ArrayList<ArrayList<Integer>> board = new ArrayList<>();
-    static int maxCSize = 3;
+    static int r, c, k;
+    static int[][] board = new int[101][101];
+    static int maxRSize = 3, maxCSize = 3;
     public static void main(String[] args) throws IOException {
         _17140 _17140 = new _17140();
 
@@ -19,98 +19,75 @@ public class _17140 {
         c = Integer.parseInt(st.nextToken());
         k = Integer.parseInt(st.nextToken());
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 1; i <= 3; i++) {
             st = new StringTokenizer(br.readLine());
-            ArrayList<Integer> row = new ArrayList<>();
-            for (int j = 0; j < 3; j++) {
-                row.add(Integer.parseInt(st.nextToken()));
+            for (int j = 1; j <= 3; j++) {
+                board[i][j] = Integer.parseInt(st.nextToken());
             }
-            board.add(row);
         }
 
         int time = 0;
         while (time <= 100) {
-            if (maxCSize > board.size()) {
-                _17140.CSolution();
-            } else _17140.RSolution();
-            time++;
-
-            if (board.get(r - 1).get(c - 1) == k) {
+            if (board[r][c] == k) {
                 System.out.println(time);
                 return;
             }
+            if (maxCSize > maxRSize) {
+                _17140.CSolution();
+            } else _17140.RSolution();
+            time++;
         }
         System.out.println(-1);
     }
 
     private void RSolution() {
-        int newMaxCSize = 0;
-        System.out.println("R Solution");
-        ArrayList<ArrayList<Integer>> newBoard = new ArrayList<>();
-        for (int i = 0; i < board.size(); i++) {
-            Map<Integer, Integer> often = new HashMap<>();
-            ArrayList<Integer> row = new ArrayList<>();
-            for (int r : board.get(i)) {
-                often.put(r, often.getOrDefault(r, 0) + 1);
+        int[][] newBoard = new int[101][101];
+        int maxC = 0;
+        for (int i = 1; i <= maxRSize; i++) {
+            Map<Integer, Integer> map = new HashMap<>();
+            for (int j = 1; j <= maxCSize; j++) {
+                if (board[i][j] != 0) {
+                    map.put(board[i][j], map.getOrDefault(board[i][j], 0) + 1);
+                }
             }
-
-            List<Map.Entry<Integer, Integer>> entryList = sortEntry(often.entrySet());
-
-            for (Map.Entry<Integer, Integer> entry : entryList) {
-                row.add(entry.getKey());
-                row.add(entry.getValue());
-                System.out.print(entry.getKey() + " ");
-                System.out.print(entry.getValue() + " ");
+            int j = 0;
+            for (Map.Entry e : sortEntry(map.entrySet())) {
+                j++;
+                newBoard[i][j] = (int) e.getKey();
+                j++;
+                newBoard[i][j] = (int) e.getValue();
             }
-            newBoard.add(row);
-            newMaxCSize = Math.max(newMaxCSize, row.size());
-            System.out.println();
+            maxC = Math.max(maxC, j);
         }
+        maxCSize = maxC;
         board = newBoard;
-        maxCSize = newMaxCSize;
     }
 
     private void CSolution() {
-        System.out.println("C Solution");
-        ArrayList<ArrayList<Integer>> newBoard = new ArrayList<>();
-        for (int j = 0; j < maxCSize; j++) {
-            Map<Integer, Integer> often = new HashMap<>();
-            for (int i = 0; i < board.size(); i++) {
-                if (board.get(i).size() > j) {
-                    often.put(board.get(i).get(j), often.getOrDefault(board.get(i).get(j), 0) + 1);
+        int[][] newBoard = new int[101][101];
+        int maxR = 0;
+        for (int j = 1; j <= maxCSize; j++) {
+            Map<Integer, Integer> map = new HashMap<>();
+            for (int i = 1; i <= maxRSize; i++) {
+                if (board[i][j] != 0) {
+                    map.put(board[i][j], map.getOrDefault(board[i][j], 0) + 1);
                 }
             }
-
-            List<Map.Entry<Integer, Integer>> entryList = sortEntry(often.entrySet());
-            Deque<Integer> queue = new LinkedList<>();
-            for (Map.Entry<Integer, Integer> entry : entryList) {
-                queue.offer(entry.getKey());
-                queue.offer(entry.getValue());
-                System.out.print(entry.getKey() + " ");
-                System.out.print(entry.getValue() + " ");
+            int i = 0;
+            for (Map.Entry e : sortEntry(map.entrySet())) {
+                i++;
+                newBoard[i][j] = (int) e.getKey();
+                i++;
+                newBoard[i][j] = (int) e.getValue();
             }
-
-            for (int i = 0; i < board.size(); i++) {
-                if (!queue.isEmpty()) {
-                    newBoard.get(i).add(queue.poll()); // 필요한 만큼 추가
-                }
-            }
-            System.out.println();
+            maxR = Math.max(maxR, i);
         }
-        int currentMax = maxCSize;
-        maxCSize = 0;
-        for (int j = currentMax - 1; j >= 0; j--) {
-            for (int i = 0; i < board.size(); i++) {
-                maxCSize = Math.max(maxCSize, board.get(i).size());
-                if (board.get(i).size() > j) {
-                    board.get(i).remove(j);
-                }
-            }
-        }
+        maxRSize = maxR;
+        board = newBoard;
     }
 
-    private List<Map.Entry<Integer, Integer>> sortEntry(Set<Map.Entry<Integer, Integer>> oftenEntry) {
-        List<Map.Entry<Integer, Integer>> entryList = new ArrayList<>(oftenEntry);
+    private List<Map.Entry<Integer, Integer>> sortEntry(Set<Map.Entry<Integer, Integer>> mapEntry) {
+        List<Map.Entry<Integer, Integer>> entryList = new ArrayList<>(mapEntry);
         entryList.sort((o1, o2) -> {
             if (o1.getValue().equals(o2.getValue())) {
                 return o1.getKey() - o2.getKey();
