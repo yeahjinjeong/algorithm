@@ -47,16 +47,18 @@ public class _14503 {
         }
         int nc;
         int nr;
+        int nd = d;
         for (int i = 0; i < 4; i++) {
-            d = (d + 3) % 4;
-            nc = c + dx[d];
-            nr = r + dy[d];
+            nd = (nd + 3) % 4; // 순회할 때 나머지 공식 꼭 기억하기
+            nc = c + dx[nd];
+            nr = r + dy[nd];
             if (checkValid(nr, nc) && board[nr][nc] == 0) {
-                DFS(nr, nc, d);
+                DFS(nr, nc, nd);
                 return;
             }
         }
-        nc = c - dx[d];
+//        nc = c - dx[d];
+        nc = c - dx[nd]; // 네 바퀴를 다 돌고 왔으니 nd는 최초의 d와 같을 것.
         nr = r - dy[d];
         if (checkValid(nr, nc) && board[nr][nc] != 1) {
             DFS(nr, nc, d);
