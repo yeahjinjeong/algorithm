@@ -42,7 +42,7 @@ public class _14503 {
 
     private static void DFS(int r, int c, int d) {
         if (board[r][c] == 0) {
-            board[r][c] = 1;
+            board[r][c] = -1;
             sum++;
         }
         int nc;
@@ -58,7 +58,7 @@ public class _14503 {
         }
         nc = c - dx[d];
         nr = r - dy[d];
-        if (checkValid(nr, nc) && board[nr][nc] == 0) {
+        if (checkValid(nr, nc) && board[nr][nc] != 1) {
             DFS(nr, nc, d);
         }
     }
