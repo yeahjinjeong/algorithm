@@ -59,20 +59,19 @@ public class MountainTile {
     }
 
     public static int solution2(int n, int[] tops) {
-        int[] a = new int[n + 1];
-        int[] b = new int[n + 1];
+        int[] a = new int[n+1]; // 겹칠 수 있는 경우
+        int[] b = new int[n+1]; // 안 겹치게 하는 경우
 
-        a[1] = 1;
-        if (tops[0] == 1) b[1] = 3;
-        else b[1] = 2;
+        a[1] = 1; // 오, 경우의 수 1
+        if (tops[0] == 1) b[1] = 3; // 왼, 정, 위
+        else b[1] = 2; // 왼, 정
 
         for (int i = 2; i <= n; i++) {
-            a[i] = (a[i - 1] + b[i - 1]) % 10007;
-            if (tops[i - 1] == 1) {
-                b[i] = (a[i - 1] * 2 + b[i - 1] * 3) % 10007;
-            } else {
-                b[i] = (a[i - 1] + b[i - 1] * 2) % 10007;
-            }
+            a[i] = (a[i - 1] * 1 /* 오 */ + b[i - 1] * 1 /* 오 */)% 10007;
+            // 위에 삼각형 있음
+            if (tops[i - 1] == 1){ b[i] = (a[i - 1] * 2 /* 정, 위 */ + b[i - 1] * 3 /* 왼, 정, 위 */) % 10007;}
+            // 위에 삼각형 없음
+            else { b[i] = (a[i - 1] * 1 /* 정 */ + b[i - 1] * 2 /* 왼, 정 */) % 10007;}
         }
         return (a[n] + b[n]) % 10007;
     }
