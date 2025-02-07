@@ -6,6 +6,7 @@ import java.util.Scanner;
  * 2*n 크기의 직사각형을 1*2, 2*1 타일로 채우기
  */
 public class _11726 {
+    static int[] d = new int[1001];
     public static void main(String[] args) {
         _11726 _11726 = new _11726();
         Scanner sc = new Scanner(System.in);
@@ -14,7 +15,6 @@ public class _11726 {
     }
 
     private int dp(int x) {
-        int[] d = new int[1001];
         if ( x == 1 ) return 1;
         if ( x == 2 ) return 2;
         if (d[x] != 0) return d[x];
