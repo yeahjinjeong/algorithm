@@ -19,7 +19,7 @@ def get_sum(candidate):
     result = 0
     for r1, c1 in house:
         tmp = 1e9
-        for r2, c2 in chicken:
+        for r2, c2 in candidate:
             tmp = min(tmp, abs(r1 - r2) + abs(c1 - c2))
         result += tmp
     return result
