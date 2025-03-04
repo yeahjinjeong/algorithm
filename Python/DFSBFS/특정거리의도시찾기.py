@@ -1,4 +1,6 @@
 # 최단 거리가 정확히 K인 모든 도시의 번호를 출력하는 프로그램
+import sys
+input = sys.stdin.readline
 
 # BFS
 from collections import deque
@@ -13,21 +15,24 @@ for i in range(m):
 def bfs(k, x, graph):
     answer = []
     visit = [False] * len(graph)
+    visit[0] = True
+    visit[x] = True
     queue = deque()
-    for i in graph[x]:
-        queue.append((i, 1))
-        visit[i] = True
-    while queue and not all(visit):
+    queue.append((x, 0))
+    while queue:
         v, level = queue.popleft()
         if level == k:
-           answer.append(v)
-        for j in graph[v]:
-            if not visit[j]:
-                queue.append((j, level + 1))
-                visit[j] = True
+            answer.append(v)
+            continue
+        for i in graph[v]:
+            if visit[i]:
+                continue
+            queue.append((i, level + 1))
+            visit[i] = True
     return answer
 
 answer = (bfs(k, x, graph))
+answer.sort()
 if len(answer)>0:
     for i in answer:
         print(i)
