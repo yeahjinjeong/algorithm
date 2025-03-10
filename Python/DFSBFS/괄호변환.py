@@ -63,6 +63,7 @@ def solution2(p):
     if check_proper(u): # 순서가 잘 되어 있다면
         answer = u + solution(v) # 정답에 그대로 추가 ( 뒤에 검증 안 된 건 다시 solution 재귀로 검사 드간다)
     else: # 만약 u = ))(( v = () 이다
+        u = list(u[:])
         for i in range(len(u)): # 0~4
             if u[i] == '(':
                 u[i] = ')'
