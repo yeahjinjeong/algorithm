@@ -30,7 +30,7 @@ distance[start] = 0
 #             min_node = i
 #     return min_node
 
-while q: # 이 부분이 교재와 다름
+while q:
     cur_cost, cur_node = heapq.heappop(q)
     if visited[cur_node]: continue
     visited[cur_node] = True
