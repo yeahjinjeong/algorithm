@@ -24,6 +24,8 @@ def dijkstra(start):
         dist, now = heapq.heappop(q)
         if distance[now] < dist:
             continue
+        # 현재 거리가 dist 보다 크거나 같을 경우에만 반복문이 실행된다
+        # 즉 현재 거리가 최단 거리가 아닌 경우
         for destination, value in graph[now]:
             cost = dist + value
             if cost < distance[destination]:
